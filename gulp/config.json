@@ -1,0 +1,56 @@
+{
+  "path": {
+    "build": {
+      "html": "dist",
+      "js": "dist/js",
+      "css": "dist/css",
+      "img": "dist/img",
+      "fonts": "dist/fonts"
+    },
+    "src": {
+      "html": "app/serve/*.html",
+      "js": "app/serve/js/**/*.js",
+      "css": "app/serve/css/**/*.css",
+      "img": "app/serve/img/**/*.*",
+      "fonts": "app/serve/fonts/**/*.*"
+    },
+    "watch": {
+      "pug": {
+        "pages": "app/pug/pages/**/*.pug",
+        "all": "app/pug/**/*.pug"
+      },
+      "data": {
+        "content": "data/content.json",
+        "navigation": "data/navigation.json"
+      },
+      "js": "app/pug/**/*.js",
+      "style": "app/sass/**/*.sass",
+      "fonts": "app/fonts/**/*.*",
+      "img": "app/img/**/*.*"
+    },
+    "app": {
+      "html": "app/serve",
+      "js": "app/serve/js",
+      "css": "app/serve/css",
+      "img": "app/serve/img",
+      "fonts": "app/serve/fonts"
+    },
+    "pug":{
+      "navigation": "./data/navigation.json",
+      "content": "./data/content.json"
+    },
+    "libs":{
+      "js": {
+        "jquery": "app/libs/bower/jquery/dist/jquery.js",
+        "any": []
+      },
+      "fonts": []
+    },
+    "clean": "dist"
+  },
+  "browserSync":{
+    "tunnel": false,
+    "notify": false
+  },
+  "release": false
+}
