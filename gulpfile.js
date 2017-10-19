@@ -1,38 +1,38 @@
 'use strict';
 
-var gulp            = require('gulp'),                  //Сам Gulp
-    cleancss        = require('gulp-clean-css'),        //Плагин для сжатия CSS
-    sass            = require('gulp-sass'),             //Плагин для сборки SASS
-    pug             = require('gulp-pug'),              //Плагин для сборки PUG
-    imagemin        = require('imagemin'),              //Плагин для сжатия изображений
-    jpegtran        = require('imagemin-jpegtran'),     //Дополнительный плагин для imagemin для сжатия JPEG
-    pngquant        = require('imagemin-pngquant'),     //Дополнительный плагин для imagemin для сжатия PNG
-    browserSync     = require('browser-sync').create(), //Плагин для автосинхронизации изменений с браузером
-    uglify          = require('gulp-uglify'),           //Плагин для сборки минификации JS
-    autoprefixer    = require('gulp-autoprefixer'),     //Плагин для задания автопрефиксов для CSS
-    concat          = require('gulp-concat'),           //Плагин для конкатенации JS
-    gulpif          = require('gulp-if'),               //Плагин для проверки условия IF
-    notify          = require('gulp-notify'),           //Плагин для отображения уведмлений в системе
-    rename          = require('gulp-rename'),           //Плагин для переименовывания файлов
-    fs              = require('fs'),                    //Модуль Node.js для работы с файловой системой
-    del             = require('del');                   //Плагин для удаления файлов и папок
+var gulp            = require('gulp'),                          //Сам Gulp
+    cleancss        = require('gulp-clean-css'),                //Плагин для сжатия CSS
+    sass            = require('gulp-sass'),                     //Плагин для сборки SASS
+    pug             = require('gulp-pug'),                      //Плагин для сборки PUG
+    imagemin        = require('imagemin'),                      //Плагин для сжатия изображений
+    jpegtran        = require('imagemin-jpegtran'),             //Дополнительный плагин для imagemin для сжатия JPEG
+    pngquant        = require('imagemin-pngquant'),             //Дополнительный плагин для imagemin для сжатия PNG
+    browserSync     = require('browser-sync').create(),         //Плагин для автосинхронизации изменений с браузером
+    uglify          = require('gulp-uglify'),                   //Плагин для сборки минификации JS
+    autoprefixer    = require('gulp-autoprefixer'),             //Плагин для задания автопрефиксов для CSS
+    concat          = require('gulp-concat'),                   //Плагин для конкатенации JS
+    gulpif          = require('gulp-if'),                       //Плагин для проверки условия IF
+    notify          = require('gulp-notify'),                   //Плагин для отображения уведмлений в системе
+    rename          = require('gulp-rename'),                   //Плагин для переименовывания файлов
+    smartgrid       = require('smart-grid'),                    //Сетка SmartGrid
+    gcmq            = require('gulp-group-css-media-queries'),  //Группировка медиазапросов в CSS
+    fs              = require('fs'),                            //Модуль Node.js для работы с файловой системой
+    del             = require('del');                           //Плагин для удаления файлов и папок
 
-var config          = require('./gulp/config.json');    //Файл конфигурации Gulp
+var config          = require('./gulp/config.json');            //Файл конфигурации Gulp
 
 //Сборка SASS в CSS
 gulp.task('sass', function () {
     return gulp.src(config.path.watch.style)
         .pipe(sass({
             outputStyle: 'expand'
-        })).on('error', notify.onError())                                    //Сборка SASS в CSS + включение уведомлений в системном трее при ошибке
-        .pipe(autoprefixer({
-            browsers: ['last 15 versions'],
-            cascade: false
-        }))                                                                  //Добавление CSS свойствам префиксов для браузеров
-        .pipe(gulpif(config.release, cleancss()))                            //Минификация CSS
-        .pipe(gulpif(config.release,  rename({suffix: '.min', prefix: ''}))) //Переименовывание CSS файла
-        .pipe(gulp.dest(config.path.app.css))                                //Перемещение CSS в папку для CSS
-        .pipe(browserSync.reload({stream: true}));                           //Обновление браузера
+        })).on('error', notify.onError())                           //Сборка SASS в CSS + включение уведомлений в системном трее при ошибке
+        .pipe(autoprefixer(config.autoprefixer))                    //Добавление CSS свойствам префиксов для браузеров
+        .pipe(gcmq())                                               //Группировка медиа запросов в CSS
+        .pipe(gulpif(config.release, cleancss()))                   //Минификация CSS
+        .pipe(gulpif(config.release,  rename({suffix: '.min'})))    //Переименовывание CSS файла
+        .pipe(gulp.dest(config.path.app.css))                       //Перемещение CSS в папку для CSS
+        .pipe(browserSync.reload({stream: true}));                  //Обновление браузера
 });
 
 //Сборка PUG в HTML
@@ -61,36 +61,41 @@ gulp.task('img', function () {
             }),
             pngquant()
         ]
-    })
+    });
+    browserSync.reload({stream: true});
+});
+
+//Сетка SmartGrid
+gulp.task('smartgrid', function () {
+    var settings = config.smartGrid.settings;
+    smartgrid(config.smartGrid.outputFolder, settings);
 });
 
 //Автообновления браузера при изменении файлов
 gulp.task('serve', ['sass', 'pug', 'js', 'fonts', 'img'], function() {
     browserSync.init({
         server: {
-            baseDir: config.path.app.html                                  //Папка локального сервера для проекта
+            baseDir: config.path.app.html            //Папка локального сервера для проекта
         },
-        notify: config.browserSync.notify,                                 //Миниуведомления в браузере
-        tunnel: config.browserSync.tunnel                                  //Туннелирование сайта на localtunnel.me
+        notify: config.browserSync.notify,           //Миниуведомления в браузере
+        tunnel: config.browserSync.tunnel            //Туннелирование сайта на localtunnel.me
     });
-    gulp.watch(config.path.watch.style, ['sass']);                         //Наблюдение за SASS файлами
+    gulp.watch(config.path.watch.style, ['sass']);   //Наблюдение за SASS файлами
     gulp.watch([config.path.watch.pug.all,
                 config.path.watch.data.content,
                 config.path.watch.data.navigation],
-                ['pug']);                                                  //Наблюдение за PUG и JSON файлами с данными
-    gulp.watch(config.path.watch.js, ['js:app']);                          //Наблюдение за JS файлами
-    gulp.watch(config.path.watch.fonts, ['fonts']);                        //Наблюдение за файлами шрифтов
-    gulp.watch(config.path.watch.img, browserSync.reload({stream: true})); //Наблюдение за файлами изображений
+                ['pug']);                            //Наблюдение за PUG и JSON файлами с данными
+    gulp.watch(config.path.watch.js, ['js:app']);    //Наблюдение за JS файлами
+    gulp.watch(config.path.watch.fonts, ['fonts']);  //Наблюдение за файлами шрифтов
+    gulp.watch(config.path.watch.img, ['img']);      //Наблюдение за файлами изображений
 });
 
 //Сборка JQuery
 gulp.task('js:jquery', function () {
    return gulp.src(config.path.libs.js.jquery)
-       .pipe(gulpif(config.release, uglify()))  //Минимизация JQuery
-       .pipe(gulpif(config.release, (rename({
-            suffix: '.min', prefix: ''
-       }))))                                    //Переименоввывание JQuery
-       .pipe(gulp.dest(config.path.app.js));    //Перемещение JQuery плагина в папку JS
+       .pipe(gulpif(config.release, uglify()))                      //Минимизация JQuery
+       .pipe(gulpif(config.release, (rename({suffix: '.min'}))))    //Переименоввывание JQuery
+       .pipe(gulp.dest(config.path.app.js));                        //Перемещение JQuery плагина в папку JS
 });
 
 //Сборка шрифтов
@@ -102,20 +107,20 @@ gulp.task('fonts', function () {
 //Сборка сторонних JS бибилиотек
 gulp.task('js:libs', function () {
    return gulp.src(config.path.libs.js.any)
-       .pipe(concat('libs.js'))                             //Конкатенация JS файлов
-       .pipe(gulpif(config.release, uglify()))              //Минимизация JS файла
-       .pipe(gulpif(config.release, rename('libs.min.js'))) //Переименоввывание JS файла
-       .pipe(gulp.dest(config.path.app.js));                //Перемещение готового файла в папку JS
+       .pipe(concat('libs.js'))                                 //Конкатенация JS файлов
+       .pipe(gulpif(config.release, uglify()))                  //Минимизация JS файла
+       .pipe(gulpif(config.release, rename({suffix: '.min'})))  //Переименоввывание JS файла
+       .pipe(gulp.dest(config.path.app.js));                    //Перемещение готового файла в папку JS
 });
 
 //Сборка JS файлов приложения
 gulp.task('js:app', function () {
    return gulp.src(config.path.watch.js)
-       .pipe(concat('app.js'))                              //Конкатенация JS файлов
-       .pipe(gulpif(config.release, uglify()))              //Минимизация JS файла
-       .pipe(gulpif(config.release, rename('app.min.js')))  //Переименоввывание JS файла
-       .pipe(gulp.dest(config.path.app.js))                 //Перемещение готового файла в папку JS
-       .pipe(browserSync.reload({stream: true}));           //Обновление браузера
+       .pipe(concat('app.js'))                                  //Конкатенация JS файлов
+       .pipe(gulpif(config.release, uglify()))                  //Минимизация JS файла
+       .pipe(gulpif(config.release, rename({suffix: '.min'})))  //Переименоввывание JS файла
+       .pipe(gulp.dest(config.path.app.js))                     //Перемещение готового файла в папку JS
+       .pipe(browserSync.reload({stream: true}));               //Обновление браузера
 });
 
 //Сборка проекта

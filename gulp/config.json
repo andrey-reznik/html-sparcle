@@ -52,5 +52,41 @@
     "tunnel": false,
     "notify": false
   },
+  "smartGrid": {
+    "settings": {
+      "filename": "_smart-grid",
+      "outputStyle": "sass",
+      "columns": 12,
+      "offset": "30px",
+      "mobileFirst": false,
+      "container": {
+        "maxWidth": "1140px",
+        "fields": "30px"
+      },
+      "breakPoints": {
+        "xl": {
+          "width": "1690px"
+        },
+        "lg": {
+          "width": "1200px"
+        },
+        "md": {
+          "width": "992px"
+        },
+        "sm": {
+          "width": "720px",
+          "fields": "15px"
+        },
+        "xs": {
+          "width": "576px"
+        }
+      }
+    },
+    "outputFolder": "app/sass/"
+  },
+  "autoprefixer": {
+    "browsers": ["last 15 versions"],
+    "cascade": false
+  },
   "release": false
 }

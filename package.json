@@ -16,6 +16,7 @@
     "gulp-autoprefixer": "^4.0.0",
     "gulp-clean-css": "^3.9.0",
     "gulp-concat": "^2.6.1",
+    "gulp-group-css-media-queries": "^1.2.0",
     "gulp-if": "^2.0.2",
     "gulp-notify": "^3.0.0",
     "gulp-pug": "^3.3.0",
@@ -24,6 +25,7 @@
     "gulp-uglify": "^3.0.0",
     "imagemin": "^5.3.1",
     "imagemin-jpegtran": "^5.0.2",
-    "imagemin-pngquant": "^5.0.1"
+    "imagemin-pngquant": "^5.0.1",
+    "smart-grid": "^2.0.0"
   }
 }
