@@ -1,148 +1,39 @@
 'use strict';
 
-var gulp            = require('gulp'),                          //Сам Gulp
-    cleancss        = require('gulp-clean-css'),                //Плагин для сжатия CSS
-    sass            = require('gulp-sass'),                     //Плагин для сборки SASS
-    pug             = require('gulp-pug'),                      //Плагин для сборки PUG
-    imagemin        = require('imagemin'),                      //Плагин для сжатия изображений
-    jpegtran        = require('imagemin-jpegtran'),             //Дополнительный плагин для imagemin для сжатия JPEG
-    pngquant        = require('imagemin-pngquant'),             //Дополнительный плагин для imagemin для сжатия PNG
-    browserSync     = require('browser-sync').create(),         //Плагин для автосинхронизации изменений с браузером
-    uglify          = require('gulp-uglify'),                   //Плагин для сборки минификации JS
-    autoprefixer    = require('gulp-autoprefixer'),             //Плагин для задания автопрефиксов для CSS
-    concat          = require('gulp-concat'),                   //Плагин для конкатенации JS
-    gulpif          = require('gulp-if'),                       //Плагин для проверки условия IF
-    notify          = require('gulp-notify'),                   //Плагин для отображения уведмлений в системе
-    rename          = require('gulp-rename'),                   //Плагин для переименовывания файлов
-    smartgrid       = require('smart-grid'),                    //Сетка SmartGrid
-    gcmq            = require('gulp-group-css-media-queries'),  //Группировка медиазапросов в CSS
-    fs              = require('fs'),                            //Модуль Node.js для работы с файловой системой
-    del             = require('del');                           //Плагин для удаления файлов и папок
+var gulp            = require('gulp'),                          //Gulp
+    plugins         = require('gulp-load-plugins')({
+                        pattern: ['*']
+                    }),                                         //Автозагрузка плагинов для Gulp
+    config          = require('./gulp/config.json');            //Файл конфигурации Gulp и его плагинов
 
-var config          = require('./gulp/config.json');            //Файл конфигурации Gulp
-
-//Сборка SASS в CSS
-gulp.task('sass', function () {
-    return gulp.src(config.path.watch.style)
-        .pipe(sass({
-            outputStyle: 'expand'
-        })).on('error', notify.onError())                           //Сборка SASS в CSS + включение уведомлений в системном трее при ошибке
-        .pipe(autoprefixer(config.autoprefixer))                    //Добавление CSS свойствам префиксов для браузеров
-        .pipe(gcmq())                                               //Группировка медиа запросов в CSS
-        .pipe(gulpif(config.release, cleancss()))                   //Минификация CSS
-        .pipe(gulpif(config.release,  rename({suffix: '.min'})))    //Переименовывание CSS файла
-        .pipe(gulp.dest(config.path.app.css))                       //Перемещение CSS в папку для CSS
-        .pipe(browserSync.reload({stream: true}));                  //Обновление браузера
-});
-
-//Сборка PUG в HTML
-gulp.task('pug', function () {
-    return gulp.src(config.path.watch.pug.pages)
-        .pipe(pug({
-            pretty: true,
-            locals: {
-                nav: JSON.parse(fs.readFileSync(config.path.pug.navigation, 'utf-8')),  //Чтение файла навигации
-                content: JSON.parse(fs.readFileSync(config.path.pug.content, 'utf-8')), //Чтение файла с контентом
-                release: config.release                                                 //Релиз или разработка
-            }
-        }))
-        .pipe(gulp.dest(config.path.app.html))      //Помещение скомпилированных HTML файлов в папку app
-        .pipe(browserSync.reload({stream: true}));  //Обновление браузера
-});
-
-//Сжатие изображений
-gulp.task('img', function () {
-    imagemin([config.path.watch.img], config.path.app.img, {
-        interlaced: true,
-        svgoPlugins: [{removeViewBox: false}],
-        plugins: [
-            jpegtran({
-                progressive: true
-            }),
-            pngquant()
-        ]
-    });
-    browserSync.reload({stream: true});
-});
-
-//Сетка SmartGrid
-gulp.task('smartgrid', function () {
-    var settings = config.smartGrid.settings;
-    smartgrid(config.smartGrid.outputFolder, settings);
-});
-
-//Автообновления браузера при изменении файлов
-gulp.task('serve', ['sass', 'pug', 'js', 'fonts', 'img'], function() {
-    browserSync.init({
-        server: {
-            baseDir: config.path.app.html            //Папка локального сервера для проекта
-        },
-        notify: config.browserSync.notify,           //Миниуведомления в браузере
-        tunnel: config.browserSync.tunnel            //Туннелирование сайта на localtunnel.me
-    });
-    gulp.watch(config.path.watch.style, ['sass']);   //Наблюдение за SASS файлами
-    gulp.watch([config.path.watch.pug.all,
-                config.path.watch.data.content,
-                config.path.watch.data.navigation],
-                ['pug']);                            //Наблюдение за PUG и JSON файлами с данными
-    gulp.watch(config.path.watch.js, ['js:app']);    //Наблюдение за JS файлами
-    gulp.watch(config.path.watch.fonts, ['fonts']);  //Наблюдение за файлами шрифтов
-    gulp.watch(config.path.watch.img, ['img']);      //Наблюдение за файлами изображений
-});
-
-//Сборка JQuery
-gulp.task('js:jquery', function () {
-   return gulp.src(config.path.libs.js.jquery)
-       .pipe(gulpif(config.release, uglify()))                      //Минимизация JQuery
-       .pipe(gulpif(config.release, (rename({suffix: '.min'}))))    //Переименоввывание JQuery
-       .pipe(gulp.dest(config.path.app.js));                        //Перемещение JQuery плагина в папку JS
-});
+//Подгрузка таскаов по названию из папки config.path.tasks
+function task(name) {
+    return require(config.path.tasks + name)(gulp, plugins, config)
+}
 
 //Сборка шрифтов
-gulp.task('fonts', function () {
-    return gulp.src(config.path.libs.fonts)
-        .pipe(gulp.dest(config.path.app.fonts)); //Перемещение файлов шрифтов в папку fonts
-});
-
-//Сборка сторонних JS бибилиотек
-gulp.task('js:libs', function () {
-   return gulp.src(config.path.libs.js.any)
-       .pipe(concat('libs.js'))                                 //Конкатенация JS файлов
-       .pipe(gulpif(config.release, uglify()))                  //Минимизация JS файла
-       .pipe(gulpif(config.release, rename({suffix: '.min'})))  //Переименоввывание JS файла
-       .pipe(gulp.dest(config.path.app.js));                    //Перемещение готового файла в папку JS
-});
-
-//Сборка JS файлов приложения
-gulp.task('js:app', function () {
-   return gulp.src(config.path.watch.js)
-       .pipe(concat('app.js'))                                  //Конкатенация JS файлов
-       .pipe(gulpif(config.release, uglify()))                  //Минимизация JS файла
-       .pipe(gulpif(config.release, rename({suffix: '.min'})))  //Переименоввывание JS файла
-       .pipe(gulp.dest(config.path.app.js))                     //Перемещение готового файла в папку JS
-       .pipe(browserSync.reload({stream: true}));               //Обновление браузера
-});
-
+gulp.task('fonts', task('fonts'));
+//Сетка SmartGrid
+gulp.task('smartgrid', task('smartgrid'));
+//Сжатие изображений
+gulp.task('img', task('img'));
+//Сборка SASS в CSS
+gulp.task('sass', task('sass'));
+//Сборка PUG в HTML
+gulp.task('pug', task('pug'));
 //Сборка проекта
-gulp.task('build', ['clear:dist', 'pug', 'sass', 'js', 'fonts', 'img'], function () {
-    for(var path in config.path.src) {                  //Цикл перебирает пути исходных файлов и помещает в соответствующие пути готового проекта
-        gulp.src(config.path.src[path])
-            .pipe(gulp.dest(config.path.build[path]));  //Перемещение файлов в соответствующую папку
-    }
-});
-
+gulp.task('build', ['clear:dist', 'pug', 'sass', 'js', 'fonts', 'img'], task('build'));
+//Автообновления браузера при изменении файлов
+gulp.task('serve', ['sass', 'pug', 'js', 'fonts', 'img'], task('serve'));
+//Сборка сторонних JS бибилиотек
+gulp.task('js:libs', task('libs'));
+//Сборка JS файлов приложения
+gulp.task('js:app', task('app'));
 //Сокращение записи для сборки JS
-gulp.task('js', ['js:jquery', 'js:app', 'js:libs']);
-
+gulp.task('js', ['js:libs', 'js:app']);
 //Удаление папки с собранным проектом
 gulp.task('clear:dist', function () {
-   return del.sync(config.path.clean);  //Удаление папки с собранным проектом
+   return plugins.del.sync(config.path.clean);  //Удаление папки с собранным проектом
 });
-
-//Очистка кеша Gulp
-gulp.task('clear:cache', function () {
-    return cache.clearAll();
-});
-
 //Задача по умолчанию
 gulp.task('default', ['serve']);

@@ -25,11 +25,9 @@ html(lang='ru')
             block content
             include ../modules/footer
         if release === true
-            script(src='js/jquery.min.js')
             script(src='js/libs.min.js')
             script(src='js/app.min.js')
         else
-            script(src='js/jquery.js')
             script(src='js/libs.js')
             script(src='js/app.js')
         block script

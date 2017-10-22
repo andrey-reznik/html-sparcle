@@ -40,12 +40,12 @@
       "content": "./data/content.json"
     },
     "libs":{
-      "js": {
-        "jquery": "app/libs/bower/jquery/dist/jquery.js",
-        "any": []
-      },
+      "js": [
+        "app/libs/jquery/dist/jquery.js"
+      ],
       "fonts": []
     },
+    "tasks": "./gulp/tasks/",
     "clean": "dist"
   },
   "browserSync":{
@@ -82,7 +82,7 @@
         }
       }
     },
-    "outputFolder": "app/sass/"
+    "outputFolder": "app/sass"
   },
   "autoprefixer": {
     "browsers": ["last 15 versions"],
