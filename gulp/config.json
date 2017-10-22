@@ -50,7 +50,7 @@
   },
   "browserSync":{
     "tunnel": false,
-    "notify": false
+    "notify": true
   },
   "smartGrid": {
     "settings": {
@@ -87,6 +87,9 @@
   "autoprefixer": {
     "browsers": ["last 15 versions"],
     "cascade": false
+  },
+  "loadPludins":{
+    "pattern": ["*"]
   },
   "release": false
 }

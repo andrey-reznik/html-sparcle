@@ -1,7 +1,7 @@
 //Автообновления браузера при изменении файлов
-module.exports = function (gulp, plugins, config) {
+module.exports = function (gulp, $, config) {
     return function () {
-        plugins.browserSync.init({
+        $.browserSync.init({
             server: {
                 baseDir: config.path.app.html               //Папка локального сервера для проекта
             },

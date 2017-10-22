@@ -1,15 +1,11 @@
 'use strict';
 
-var gulp            = require('gulp'),                          //Gulp
-    plugins         = require('gulp-load-plugins')({
-                        pattern: ['*']
-                    }),                                         //Автозагрузка плагинов для Gulp
-    config          = require('./gulp/config.json');            //Файл конфигурации Gulp и его плагинов
+var gulp   = require('gulp'),                                  //Gulp
+    config = require('./gulp/config.json'),                    //Файл конфигурации Gulp и его плагинов
+    $      = require('gulp-load-plugins')(config.loadPludins); //Плагин для автозагрузки плагинов для Gulp
 
 //Подгрузка таскаов по названию из папки config.path.tasks
-function task(name) {
-    return require(config.path.tasks + name)(gulp, plugins, config)
-}
+function task(name) {return require(config.path.tasks + name)(gulp, $, config)}
 
 //Сборка шрифтов
 gulp.task('fonts', task('fonts'));
@@ -33,7 +29,7 @@ gulp.task('js:app', task('app'));
 gulp.task('js', ['js:libs', 'js:app']);
 //Удаление папки с собранным проектом
 gulp.task('clear:dist', function () {
-   return plugins.del.sync(config.path.clean);  //Удаление папки с собранным проектом
+   return $.del.sync(config.path.clean);  //Удаление папки с собранным проектом
 });
 //Задача по умолчанию
 gulp.task('default', ['serve']);

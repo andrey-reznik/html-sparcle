@@ -1,7 +1,7 @@
 //Сетка SmartGrid
-module.exports = function (gulp, plugins, config) {
+module.exports = function (gulp, $, config) {
     return function () {
         var settings = config.smartGrid.settings;
-        plugins.smartGrid(config.smartGrid.outputFolder, settings);
+        $.smartGrid(config.smartGrid.outputFolder, settings);
     };
 };
