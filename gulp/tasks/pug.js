@@ -15,7 +15,7 @@ module.exports = function (gulp, $, config) {
                 $.browserSync.notify(err.message, 3000);
                 this.emit('end');
             }))
-            .pipe(gulp.dest(config.path.app.html))              //Помещение скомпилированных HTML файлов в папку app
+            .pipe(gulp.dest(config.path.app.html))        //Помещение скомпилированных HTML файлов в папку app
             .pipe($.browserSync.reload({stream: true}));  //Обновление браузера
     };
 };
