@@ -43,10 +43,20 @@
       "js": [
         "app/libs/jquery/dist/jquery.js"
       ],
-      "fonts": []
+      "fonts": ["./folders/for/you/custom/fonts/**/*"]
     },
-    "tasks": "./gulp/tasks/",
-    "clean": "dist"
+    "tasks": [
+      "./gulp/tasks/dist",
+      "./gulp/tasks/clear",
+      "./gulp/tasks/fonts",
+      "./gulp/tasks/img",
+      "./gulp/tasks/js",
+      "./gulp/tasks/pug",
+      "./gulp/tasks/sass",
+      "./gulp/tasks/serve",
+      "./gulp/tasks/smartgrid",
+      "./gulp/tasks/watch"
+    ]
   },
   "browserSync":{
     "tunnel": false,

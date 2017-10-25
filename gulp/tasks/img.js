@@ -1,16 +1,15 @@
 //Сжатие изображений
-module.exports = function (gulp, $, config) {
-    return function () {
-        $.imagemin([config.path.watch.img], config.path.app.img, {
+module.exports = function () {
+    $.gulp.task('img', function () {
+        return $.gp.imagemin([$.config.path.watch.img], $.config.path.app.img, {
             interlaced: true,
             svgoPlugins: [{removeViewBox: false}],
             plugins: [
-                $.imageminJpegtran({
+                $.gp.imageminJpegtran({ //Сжатие JPEG
                     progressive: true
                 }),
-                $.imageminPngquant()
+                $.gp.imageminPngquant() //Сжатие PNG
             ]
         });
-        $.browserSync.reload({stream: true});
-    };
+    });
 };
