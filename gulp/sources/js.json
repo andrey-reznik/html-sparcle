@@ -1,0 +1,5 @@
+{
+  "src": [
+    "app/libs/jquery/dist/jquery.js"
+  ]
+}

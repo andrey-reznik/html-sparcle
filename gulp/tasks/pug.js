@@ -9,9 +9,7 @@ module.exports = function () {
                     content: JSON.parse($.fs.readFileSync($.config.path.pug.content, 'utf-8')), //Чтение файла с контентом
                     release: $.config.release                                                   //Релиз или разработка
                 }
-            }).on('error', $.gp.notify.onError(function (error) {
-                return console.log(error.filename, error.message)
-            })))
+            }).on('error', $.gp.notify.onError()))
             .pipe($.gulp.dest($.config.path.app.html))                                          //Помещение скомпилированных HTML файлов в папку app
             .on('end', $.gp.browserSync.reload);                                                //Обновление браузера после завершения таска
     });

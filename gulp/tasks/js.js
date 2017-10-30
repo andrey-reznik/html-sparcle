@@ -1,7 +1,7 @@
 //Сборка сторонних JS бибилиотек
 module.exports = function () {
     $.gulp.task('js:libs', function () {
-        return $.gulp.src($.config.path.libs.js)
+        return $.gulp.src($.gp.requireReload($.config.gulpRoot + $.config.path.libs.js).src)
             .pipe($.gp.concat('libs.js'))                                   //Конкатенация JS файлов
             .pipe($.gp.if($.config.release, $.gp.uglify()))                 //Минимизация JS файла
             .pipe($.gp.if($.config.release, $.gp.rename({suffix: '.min'}))) //Переименоввывание JS файла

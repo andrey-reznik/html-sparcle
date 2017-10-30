@@ -35,15 +35,13 @@
       "img": "app/serve/img",
       "fonts": "app/serve/fonts"
     },
-    "pug":{
+    "pug": {
       "navigation": "./data/navigation.json",
       "content": "./data/content.json"
     },
-    "libs":{
-      "js": [
-        "app/libs/jquery/dist/jquery.js"
-      ],
-      "fonts": ["./folders/for/you/custom/fonts/**/*"]
+    "libs": {
+      "js": "gulp/sources/js.json",
+      "fonts": "gulp/sources/fonts.json"
     },
     "tasks": [
       "./gulp/tasks/dist",
@@ -58,7 +56,7 @@
       "./gulp/tasks/watch"
     ]
   },
-  "browserSync":{
+  "browserSync": {
     "tunnel": false,
     "notify": false
   },
@@ -101,5 +99,6 @@
   "loadPludins":{
     "pattern": ["*"]
   },
-  "release": false
+  "release": false,
+  "gulpRoot": "../../"
 }
