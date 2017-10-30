@@ -26,7 +26,7 @@ $ gulp
 4. Fonts must be imported into a file `app/sass/_fonts.sass`
 5. Third-party libraries must be imported into a file `app/sass/_libs.sass`
 6. All media queries must be in a file `app/sass/_media.sass`
-7. All SASS variables must be in a file `app/sass/_media.sass`
+7. All SASS variables must be in a file `app/sass/_vars.sass`
 8. The main styles of the project should be in `app/sass/main.sass`
 9. Original image files must be in the folder `app/img`
 10. The `app/serve` folder is responsible for storing the compiled and assembled project files
