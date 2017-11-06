@@ -9,8 +9,8 @@
     },
     "src": {
       "html": "app/serve/*.html",
-      "js": "app/serve/js/**/*.js",
-      "css": "app/serve/css/**/*.css",
+      "js": "app/serve/js/**/*.{js,map}",
+      "css": "app/serve/css/**/*.{css,map}",
       "img": "app/serve/img/**/*.*",
       "fonts": "app/serve/fonts/**/*.*"
     },
