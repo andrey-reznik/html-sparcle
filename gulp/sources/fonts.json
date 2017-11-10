@@ -1,5 +1,3 @@
-{
-  "src": [
-    "*.fontstub"
-  ]
-}
+[
+  "*.fontstub"
+]

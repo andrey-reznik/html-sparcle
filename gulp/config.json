@@ -11,7 +11,7 @@
       "html": "app/serve/*.html",
       "js": "app/serve/js/**/*.{js,map}",
       "css": "app/serve/css/**/*.{css,map}",
-      "img": "app/serve/img/**/*.*",
+      "img": "app/serve/img/**/*.{jpg,png,gif,svg}",
       "fonts": "app/serve/fonts/**/*.*"
     },
     "watch": {
@@ -26,7 +26,7 @@
       "js": "app/pug/**/*.js",
       "style": "app/sass/**/*.sass",
       "fonts": "app/fonts/**/*.*",
-      "img": "app/img/**/*.*"
+      "img": "app/img/**/*.{jpg,png,gif,svg}"
     },
     "app": {
       "html": "app/serve",
@@ -48,7 +48,7 @@
       "./gulp/tasks/clear",
       "./gulp/tasks/fonts",
       "./gulp/tasks/img",
-      "./gulp/tasks/js",
+      "./gulp/tasks/scripts",
       "./gulp/tasks/pug",
       "./gulp/tasks/sass",
       "./gulp/tasks/serve",
@@ -61,36 +61,7 @@
     "notify": false
   },
   "smartGrid": {
-    "settings": {
-      "filename": "_smart-grid",
-      "outputStyle": "sass",
-      "columns": 12,
-      "offset": "30px",
-      "mobileFirst": false,
-      "container": {
-        "maxWidth": "1140px",
-        "fields": "30px"
-      },
-      "breakPoints": {
-        "xl": {
-          "width": "1690px"
-        },
-        "lg": {
-          "width": "1200px"
-        },
-        "md": {
-          "width": "992px"
-        },
-        "sm": {
-          "width": "720px",
-          "fields": "15px"
-        },
-        "xs": {
-          "width": "576px"
-        }
-      }
-    },
-    "outputFolder": "app/sass"
+    "config": "gulp/smartgrid.json"
   },
   "autoprefixer": {
     "browsers": ["last 15 versions"],
