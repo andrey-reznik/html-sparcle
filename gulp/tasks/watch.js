@@ -10,5 +10,6 @@ module.exports = function () {
         $.gulp.watch($.config.path.watch.img, $.gulp.series('img'));        //Наблюдение за файлами изображений
         $.gulp.watch($.config.path.libs.js, $.gulp.series('js:libs'));      //Наблюдение за файлом списка JS библиотек
         $.gulp.watch($.config.path.libs.fonts, $.gulp.series('fonts'));     //Наблюдение за файлом списка шрифтов
+        $.gulp.watch($.config.smartGrid.config, $.gulp.series('smartgrid'));//Наблюдение за файлом настроек SmartGrid
     });
 };
