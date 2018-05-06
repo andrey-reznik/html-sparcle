@@ -26,7 +26,8 @@
       "js": "app/pug/**/*.js",
       "style": "app/sass/**/*.sass",
       "fonts": "app/fonts/**/*.*",
-      "img": "app/img/**/*.{jpg,png,gif,svg}"
+      "img": "app/img/**/*.{jpg,png,gif,svg}",
+      "svg": "app/img/**/*.svg"
     },
     "app": {
       "html": "app/serve",
@@ -53,6 +54,7 @@
       "./gulp/tasks/sass",
       "./gulp/tasks/serve",
       "./gulp/tasks/smartgrid",
+      "./gulp/tasks/svg",
       "./gulp/tasks/watch"
     ]
   },
