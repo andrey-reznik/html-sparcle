@@ -20,7 +20,6 @@
     "gulp-pug": "^3.3.0",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.6.1",
-    "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.1",
     "gulp-svg-sprite": "^1.4.0",
     "gulp-svgmin": "^1.2.4",
@@ -30,5 +29,8 @@
     "imagemin-pngquant": "^5.0.1",
     "require-reload": "^0.2.2",
     "smart-grid": "^2.0.1"
+  },
+  "dependencies": {
+    "gulp-stylus": "^2.7.0"
   }
 }
