@@ -24,7 +24,7 @@
         "navigation": "data/navigation.json"
       },
       "js": "app/pug/**/*.js",
-      "style": "app/stylus/*.styl",
+      "style": "app/stylus/**/*.styl",
       "fonts": "app/fonts/**/*.*",
       "img": "app/img/**/*.{jpg,png,gif,svg}",
       "svg": "app/img/**/*.svg"
