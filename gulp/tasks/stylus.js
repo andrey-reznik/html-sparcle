@@ -7,7 +7,7 @@ module.exports = function () {
                 use: $.gp.nib(),
                 'include css': true
             }).on('error', $.gp.notify.onError()))                              //Сборка SASS в CSS + включение уведомлений в системном трее при ошибке
-            .pipe($.gp.autoprefixer($.config.autoprefixer))                     //Добавление CSS свойствам префиксов для браузеров
+            .pipe($.gp.autoprefixer($.config.autoPrefixer))                     //Добавление CSS свойствам префиксов для браузеров
             .pipe($.gp.groupCssMediaQueries())                                  //Группировка медиа запросов в CSS
             .pipe($.gp.if($.config.release, $.gp.cleanCss()))                   //Минификация CSS
             .pipe($.gp.if($.config.release, $.gp.rename({suffix: '.min'})))     //Переименовывание CSS файла

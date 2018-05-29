@@ -3,7 +3,7 @@ global.$ = {
     config: config,
     fs: require('fs'),
     gulp: require('gulp'),
-    gp: require('gulp-load-plugins')(config.loadPludins)
+    gp: require('gulp-load-plugins')(config.loadPlugins)
 };
 
 $.config.path.tasks.forEach(function (taskPath) {

@@ -68,11 +68,11 @@
   "smartGrid": {
     "config": "gulp/smartgrid.json"
   },
-  "autoprefixer": {
+  "autoPrefixer": {
     "browsers": ["last 15 versions"],
     "cascade": false
   },
-  "loadPludins":{
+  "loadPlugins":{
     "pattern": ["*"]
   },
   "release": false,
