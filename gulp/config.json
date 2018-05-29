@@ -24,7 +24,10 @@
         "navigation": "data/navigation.json"
       },
       "js": "app/pug/**/*.js",
-      "style": "app/stylus/**/*.styl",
+      "stylus": {
+        "watch": "app/stylus/**/*.styl",
+        "src": "app/stylus/main.styl"
+      },
       "fonts": "app/fonts/**/*.*",
       "img": "app/img/**/*.{jpg,png,gif,svg}",
       "svg": "app/img/**/*.svg"
