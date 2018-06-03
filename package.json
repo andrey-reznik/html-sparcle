@@ -31,6 +31,7 @@
     "imagemin-pngquant": "^5.0.1",
     "nib": "^1.1.2",
     "require-reload": "^0.2.2",
-    "smart-grid": "^2.0.1"
+    "smart-grid": "^2.0.1",
+    "stylus-px2rem": "^1.0.14"
   }
 }
