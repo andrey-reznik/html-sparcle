@@ -1,0 +1,10 @@
+use-bootstrap = true
+bootstrap-ver = 3
+
+if use-bootstrap
+  if bootstrap-ver == 4
+    @import "../../../node_modules/bootstrap3/dist/css/bootstrap.css"
+  else
+    @import "../../../node_modules/bootstrap/dist/css/bootstrap.css"
+else
+  @import "utils/smart-grid.styl"
