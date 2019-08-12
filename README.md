@@ -4,7 +4,7 @@
 $ git clone git@bitbucket.org:andrey-reznik/work-template.git
 $ yarn install
 ```
-#### Start server
+### Start server
 ```
 $ gulp
 ```
