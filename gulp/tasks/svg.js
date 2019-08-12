@@ -10,8 +10,8 @@ module.exports = function () {
             .pipe($.gp.cheerio({
                 run: function($) {
                     $('[fill]').removeAttr('fill');     //Удаляет атрибут fill
-                    $('[stroke]').removeAttr('stroke'); //Удаляет атрибут fill
-                    $('[style]').removeAttr('style');   //Удаляет атрибут fill
+                    $('[stroke]').removeAttr('stroke'); //Удаляет атрибут stroke
+                    $('[style]').removeAttr('style');   //Удаляет атрибут style
                 },
                 parserOptions: { xmlMode: true }
             }))
