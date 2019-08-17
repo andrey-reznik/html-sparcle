@@ -1,7 +1,7 @@
 {
   "settings": {
-    "filename": "smart-grid",
-    "outputStyle": "styl",
+    "filename": "_smart-grid",
+    "outputStyle": "sass",
     "columns": 12,
     "offset": "30px",
     "mobileFirst": false,
@@ -28,5 +28,5 @@
       }
     }
   },
-  "outputFolder": "app/stylus/utils"
+  "outputFolder": "app/sass"
 }

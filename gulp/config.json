@@ -24,9 +24,9 @@
         "navigation": "data/navigation.json"
       },
       "js": "app/pug/**/*.js",
-      "stylus": {
-        "watch": "app/stylus/**/*.styl",
-        "src": "app/stylus/main.styl"
+      "sass": {
+        "watch": "app/sass/**/*.sass",
+        "src": "app/sass/main.sass"
       },
       "fonts": "app/fonts/**/*.*",
       "img": "app/img/**/*.{jpg,png,gif,svg}",
@@ -54,7 +54,7 @@
       "./gulp/tasks/img",
       "./gulp/tasks/scripts",
       "./gulp/tasks/pug",
-      "./gulp/tasks/stylus",
+      "./gulp/tasks/sass",
       "./gulp/tasks/serve",
       "./gulp/tasks/smartgrid",
       "./gulp/tasks/svg",
