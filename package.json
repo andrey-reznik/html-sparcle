@@ -7,6 +7,7 @@
   "license": "MIT",
   "devDependencies": {
     "bemto.pug": "^2.1.0",
+    "bourbon": "^6.0.0",
     "browser-sync": "^2.18.13",
     "del": "^3.0.0",
     "gulp": "gulpjs/gulp#4.0",
@@ -29,6 +30,7 @@
     "imagemin": "^5.3.1",
     "imagemin-jpegtran": "^5.0.2",
     "imagemin-pngquant": "^5.0.1",
+    "px2rem.scss": "^0.2.3",
     "require-reload": "^0.2.2",
     "smart-grid": "^2.0.1"
   }
