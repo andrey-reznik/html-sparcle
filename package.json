@@ -7,8 +7,6 @@
   "license": "MIT",
   "devDependencies": {
     "bemto.pug": "^2.1.0",
-    "bootstrap": "^4.3.1",
-    "bootstrap3": "^3.3.5",
     "browser-sync": "^2.18.13",
     "del": "^3.0.0",
     "gulp": "gulpjs/gulp#4.0",
