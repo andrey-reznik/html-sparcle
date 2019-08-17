@@ -5,8 +5,7 @@ module.exports = function () {
             .pipe($.gp.pug({
                 pretty: true,
                 locals: {
-                    nav: JSON.parse($.fs.readFileSync($.config.path.pug.navigation, 'utf-8')),  //Чтение файла навигации
-                    content: JSON.parse($.fs.readFileSync($.config.path.pug.content, 'utf-8')), //Чтение файла с контентом
+                    $: JSON.parse($.fs.readFileSync($.config.path.pug.data, 'utf-8')),  //Чтение файла навигации
                     release: $.config.release                                                   //Релиз или разработка
                 }
             }).on('error', $.gp.notify.onError()))

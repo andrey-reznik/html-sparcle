@@ -20,8 +20,7 @@
         "all": "app/pug/**/*.pug"
       },
       "data": {
-        "content": "data/content.json",
-        "navigation": "data/navigation.json"
+        "data": "app/pug/data.json"
       },
       "js": "app/pug/**/*.js",
       "sass": {
@@ -40,8 +39,7 @@
       "fonts": "app/serve/fonts"
     },
     "pug": {
-      "navigation": "./data/navigation.json",
-      "content": "./data/content.json"
+      "data": "./app/pug/data.json"
     },
     "libs": {
       "js": "gulp/sources/js.json",
