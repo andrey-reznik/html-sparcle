@@ -11,20 +11,19 @@
     },
     "breakPoints": {
       "xl": {
-        "width": "1690px"
-      },
-      "lg": {
         "width": "1200px"
       },
-      "md": {
+      "lg": {
         "width": "992px"
       },
+      "md": {
+        "width": "768px"
+      },
       "sm": {
-        "width": "720px",
-        "fields": "15px"
+        "width": "576px"
       },
       "xs": {
-        "width": "576px"
+        "width": "0px"
       }
     }
   },
