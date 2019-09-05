@@ -1,0 +1,37 @@
+header.header
+    .container
+        .row
+            .logo
+                img(src= $.home.logo.img, alt= $.home.logo.alt)
+                include ../blocks/burger            
+            nav.navigation
+                +b.UL.menu
+                    each link in $.navigation
+                        +e.LI.item
+                            if link.is_active                                
+                                +e.A(href= link.link class= link.class).link._active= link.title
+                            else
+                                +e.A(href= link.link class= link.class).link= link.title
+            .request-quote
+                +b.btn-wrapper._nav
+                    +b.A(href= $.home.page_heading.buttons.request_qoute.link class= $.home.page_heading.buttons.request_qoute.class).btn._primary= $.home.page_heading.buttons.request_qoute.title
+        .row
+            +b.home-content
+                +e.H1.heading= $.home.page_heading.title
+                +e.P.text= $.home.page_heading.text
+                +b.btn-wrapper._heading
+                    - var button= $.home.page_heading.buttons
+                    +b.A(href= button.get_started.link class= button.get_started.class).btn= button.get_started.title
+                    +b.A(href= button.locations.link class= button.locations.class).btn
+                        +icon('place')
+                        = button.locations.title
+        .row
+            +b.A(href= $.home.learn_more.link).learn-more
+                +e.P.text= $.home.learn_more.text
+                +b.learn-more-arrow
+                    +e.line
+                    +e.circle
+                        +e.arrow
+        .row
+            +b.scroll-info
+                +e.P.text= $.home.scroll_info.text

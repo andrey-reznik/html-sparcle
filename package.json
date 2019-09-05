@@ -33,5 +33,10 @@
     "px2rem.scss": "^0.2.3",
     "require-reload": "^0.2.2",
     "smart-grid": "^2.0.1"
+  },
+  "dependencies": {
+    "jquery": "^3.4.1",
+    "owl.carousel": "^2.3.4",
+    "slick-carousel": "^1.8.1"
   }
 }

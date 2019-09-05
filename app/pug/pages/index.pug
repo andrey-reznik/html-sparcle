@@ -4,3 +4,113 @@ block variables
     - var title = $.home.title
 
 block content
+    section.our-services#our-services
+        .container
+            .row
+                .cards-wrapper
+                    +b.card._primary
+                        +icon('house')
+                        +e.H2.title= $.services.house.title
+                        +e.P.text= $.services.house.text
+                        +e.A(href= $.services.house.link).link= $.services.house.action
+                    
+                    +b.card._commercial
+                        +icon('commercial')
+                        +e.H3.title= $.services.commercial.title
+                        +e.P.text= $.services.commercial.text
+                        +e.A(href= $.services.commercial.link).link= $.services.commercial.action
+
+    section.whyus#whyus
+        .container
+            .row
+                +b.new-way
+                    +e.H2.title= $.new_way[0].title.text
+            .row
+                +b.new-way._part-one
+                    +e.P.text!= $.new_way[0].description.part_1.text
+                +b.new-way._part-two
+                    +e.P.text!= $.new_way[0].description.part_2.text
+                    +e.P.text!= $.new_way[0].description.part_3.text
+            .row
+                +b.image-wrapper
+                    +e.IMG(src= $.new_way[1].image.src, alt= $.new_way[1].image.alt).room
+                    +e.IMG(src= $.new_way[1].dots.src, alt= $.new_way[1].dots.alt).dots
+            .row
+                +b.adventages
+                    p.notice= $.new_way[2].notice.text
+                    +e.H2.title= $.new_way[2].title.text
+                    +e.P.text!= $.new_way[2].description.text
+                    +b.UL.adventages-list
+                        each adv in $.new_way[2].advantages
+                            +e.LI.item
+                                +icon(adv.icon)
+                                = adv.title
+                +b.side-image-wrapper
+                    .hero
+    section.booking#booking
+        .container
+            .row
+                +b.booking-config
+                    p.notice= $.booking.config.description
+                    +e.H2.title= $.booking.config.title
+                    +e.P.text= $.booking.config.text
+                    +b.FORM(action= $.booking.config.configure.form.action).form-configure
+                        +e.P.title= $.booking.config.configure.form.title
+                        .buttons-wrapper
+                            +b.A(href= $.booking.config.configure.form.buttons.residential.link).btn._primary._primary_bordered= $.booking.config.configure.form.buttons.residential.title
+                            +b.A(href= $.booking.config.configure.form.buttons.commercial.link).btn._secondary= $.booking.config.configure.form.buttons.commercial.title
+                        .rooms-counter-wrapper
+                            +b.rooms-counter#bedrooms
+                                +e.title= $.booking.config.configure.form.room_types.bedrooms.title
+                                +b.buttons-wrapper
+                                    +e.down
+                                    +e.INPUT(type= 'text' value= $.booking.config.configure.form.room_types.bedrooms.strart_count).count 
+                                    +e.up
+                            +b.rooms-counter#bathrooms
+                                +e.title= $.booking.config.configure.form.room_types.bathrooms.title
+                                +b.buttons-wrapper
+                                    +e.down
+                                    +e.INPUT(type= 'text' value= $.booking.config.configure.form.room_types.bathrooms.strart_count).count
+                                    +e.up
+                +b.booking-results
+                    +e.H2.subtotal= $.booking.result_card.title
+                    .time-wrapper
+                        +e.P.text= $.booking.result_card.total_time.text
+                        +e.P.time= $.booking.result_card.total_time.time
+                    +e.P.rooms= $.booking.result_card.rooms.text
+                    +b.FORM(action="#").confirm-booking
+                        each input in $.booking.result_card.form.inputs
+                            if input.type=='submit'
+                                button.btn.btn_link(type= input.type)= input.title
+                                    +icon('arrow_right')
+                            else
+                                +e.INPUT(type= input.type placeholder= input.placeholder).input
+    section.testimonials#testimonials
+        .container
+            .row
+                +b.heading
+                    +e.H2.title= $.testimonials.title
+        .container-fluid
+            .row
+                .reviews.owl-carousel
+                    each r in $.testimonials.reviews
+                        +b.review
+                            +e.IMG(src= r.img).image
+                            +e.P.text= r.text
+                            .author
+                                +e.P.name= r.author.name
+                                +e.P.city= r.author.city
+    section.contactus#contactus
+        .container
+            h3.title= $.contactus.title.text
+            .buttons-wrapper
+                a(href= $.contactus.buttons.call.link).btn.btn_primary.btn_primary_bordered= $.contactus.buttons.call.title
+                a(href= $.contactus.buttons.email.link).btn.btn_secondary= $.contactus.buttons.email.title
+    footer.footer
+        .container
+            h2.title= $.footer.title
+            p.text= $.footer.text
+            .social-icons
+                each icon in $.footer.social
+                    a(href= icon.link target='_blank').icon
+                        img(src= icon.logo, alt= icon.logo.replace('/img/', '').replace('.svg', '')).icon

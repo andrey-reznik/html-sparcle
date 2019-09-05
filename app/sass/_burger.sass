@@ -1,0 +1,74 @@
+$background: #3d566e
+$color: #ffffff
+
+$height-icon: 20px
+$width-line: 31px
+$height-line: 3px
+$transition-time: 0.4s
+$rotation: 45deg
+$translateY: ($height-icon / 2)
+$translateX: 0
+
+.hamburger-icon
+	text-align: right
+	color: $color
+	width: $width-line
+	height: $height-icon
+	position: relative
+	display: block
+	z-index: 2
+	margin: ($height-icon * 2) auto $height-icon auto
+
+	.line
+		display: block
+		background: $color
+		width: $width-line
+		height: $height-line
+		position: absolute
+		left: 0
+		border-radius: ($height-line / 2)
+		transition: all $transition-time
+		-webkit-transition: all $transition-time
+		-moz-transition: all $transition-time
+		&.line-1
+			top: 0
+		&.line-2
+			top: 50%
+		&.line-3
+			top: 100%
+	&:hover, &:focus
+		.line-1
+			transform: translateY($height-line / 2 * -1)
+			-webkit-transform: translateY($height-line / 2 * -1)
+			-moz-transform: translateY($height-line / 2 * -1)
+		.line-3
+			transform: translateY($height-line / 2)
+			-webkit-transform: translateY($height-line / 2)
+			-moz-transform: translateY($height-line / 2)
+	&.active
+		.line-1
+			transform: translateY($translateY) translateX($translateX) rotate($rotation)
+			-webkit-transform: translateY($translateY) translateX($translateX) rotate($rotation)
+			-moz-transform: translateY($translateY) translateX($translateX) rotate($rotation)
+		.line-2
+			opacity: 0
+		.line-3
+			transform: translateY($translateY * -1) translateX($translateX) rotate($rotation * -1)
+			-webkit-transform: translateY($translateY * -1) translateX($translateX) rotate($rotation * -1)
+			-moz-transform: translateY($translateY * -1) translateX($translateX) rotate($rotation * -1)
+
+a.hamburger-icon
+	text-decoration: none
+	color: #95a5a6
+	margin: 0.5em 1.5em
+	display: none
+	+sm-block()
+		display: inline-flex
+		margin-left: auto
+		margin-right: 0
+		&.active
+			position: fixed
+			right: 30px
+			top: 45px
+	&:hover, &:focus
+		color: $color

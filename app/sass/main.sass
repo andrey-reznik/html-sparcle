@@ -6,3 +6,670 @@
 @import "keyframes"
 @import "smart-grid"
 @import "media"
+@import "burger"
+
++reset()
+
+.container
+    +wrapper()
+
+.container-fluid
+    +wrapper-full()
+
+.row
+    +row-flex()
+
+h1, h2, h3, h4, h5, h6
+    color: $palette-secondary
+
+h2
+    font-size: 30px
+    font-weight: 600
+
+body
+    font-family: 'Avenir Next LT Pro'
+    font-weight: 400
+    font-size: 14px
+// 
+.btn
+    padding: 0px 20px
+    height: 45px
+    min-width: 160px
+    border: none
+    border-radius: 100px
+    box-sizing: border-box
+    display: inline-flex
+    justify-content: center
+    font-weight: 600
+    font-size: 15px
+    text-decoration: none
+    align-items: center
+    cursor: pointer
+    white-space: nowrap
+    .icon
+        display: inline-block
+    &_primary
+        background-color: #fff9f6
+        color: $palette-primary
+        &_bordered
+            // background-color: #fff9f6
+            border: 1px solid $palette-primary
+    &_secondary
+        color: $palette-secondary
+        border: 1px solid #d1d3de
+        text-align: center
+    &_link
+        background: transparent
+        border: none
+        color: $palette-primary
+        padding: 0
+        font-family: inherit
+        font-weight: 500
+        & .icon
+            fill: $palette-primary
+            height: 14px
+            width: 14px
+    &_transparent
+        background: transparent
+        border: 1px solid #ffffff
+        font-weight: 500
+        color: #ffffff
+    &-wrapper
+        &_nav
+            margin-left: auto
+        &_heading
+            margin-top: 76px
+            display: flex
+            align-items: center
+            +lg(justify-content, center)
+            +sm(flex-direction, column)
+            +sm-block()
+                flex-direction: column
+                .btn
+                    margin-right: 0
+                    margin-bottom: 12px
+                    width: 100%
+            .btn
+                margin-right: 25px
+                &:last-child
+                    margin-right: 0
+
+.notice
+    color: $palette-primary
+    text-transform: uppercase
+    font-size: 13px
+// Header
+.header
+    background: linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), url('/img/header_bg.jpg') no-repeat center center / cover
+    min-height: 100vh
+    .row
+        justify-content: space-between
+.logo
+    +col()
+    +size(2)
+    +size-xl(12)
+    margin-top: 36px
+    text-align: center
+    justify-content: center
+    display: flex
+    align-items: center
+    
+.navigation
+    +col()
+    +size(7)
+    +xl-block()
+        +size(12)
+    display: flex
+    flex-direction: row
+    margin-top: 36px
+    .menu
+        display: flex
+        flex-direction: row
+        height: 50px
+        align-items: center
+        justify-content: space-between
+        border-bottom: 2px solid rgba(#ffffff, .5)
+        width: 100%
+        +from($break_sm + 1)
+            display: flex !important
+        +sm-block()
+            display: none
+            background-color: $palette-primary
+            position: absolute
+            z-index: 1
+            width: 100%
+            padding: 30px
+            height: 100vh
+            box-sizing: border-box
+            top: 0
+            left: 0
+            position: fixed
+            &__link
+                line-height: 40px
+                width: max-content
+                border: 1px solid #ffffff
+                margin-bottom: 10px
+                box-sizing: border-box
+                padding: 0 8px
+        &__link
+            color: #ffffff
+            text-decoration: none
+            display: block
+            font-family: 'Avenir Next LT Pro'
+            font-weight: 500
+            font-size: 15px
+            &_active
+                position: relative
+                &:first-child::after, &:last-child::after
+                    left: 0
+                &::after
+                    content: ""
+                    height: 4px
+                    background: $palette-primary
+                    position: absolute
+                    left: -25%
+                    width: 150%
+                    margin-top: 33px
+                    +sm(display, none)
+
+.request-quote
+    +col()
+    +size(2)
+    +xl-block()
+        +size(12)
+        text-align: center
+    +sm-block()
+        padding: 0
+        margin-top: -34px
+    margin-top: 36px
+
+.home-content
+    +col()
+    +size(8)
+    +shift-left(1)
+    +lg-block()
+        margin: auto
+        width: 100%
+        text-align: center
+    color: #ffffff
+    padding-top: 90px
+    &__heading
+        font-size: 65px
+        font-weight: 600
+        +lg(font-size, 55px)
+        +md(font-size, 35px)
+        +sm(font-size, 30px)
+    &__text
+        font-size: 15px
+        margin-top: 29px
+        width: 400px
+        +lg(width, 100%)
+    .btn
+        .icon-place
+            width: 17px
+            height: 17px
+            fill: #ffffff
+            margin-right: 10px
+
+.learn-more
+    +col()
+    +size(7)
+    +shift-left(1)
+    margin-top: 70px
+    display: flex
+    align-items: center
+    text-decoration: none
+    transition: all .5s ease
+    // Styles for LARGE screens
+    +lg-block()
+        margin: auto
+        width: 100%
+    // Styles for SMALL screens
+    +sm-block()
+        justify-content: center
+        flex-wrap: wrap
+        margin-top: 30px
+    &__text
+        text-transform: uppercase
+        font-weight: 500
+        color: #fffefe
+        white-space: nowrap
+        margin-right: 40px
+        +sm-block()
+            justify-content: center
+            width: 100%
+            margin-right: 0
+            display: inline-flex
+            align-items: center
+            border: 1px solid #ffffff
+            border-radius: 100px
+            padding: 8px 14px
+            transition: all 1s ease
+            &:hover
+                background-color: rgba(#ffffff, .2)
+            &::after
+                content: ''
+                display: block
+                height: 12px
+                width: 12px
+                margin-left: 15px
+                box-sizing: border-box
+                transform: rotate(45deg)
+                border: 2px solid #ffffff
+                border-left: none
+                border-bottom: none
+
+    &-arrow
+        +sm(display, none)
+        display: flex
+        flex-direction: row
+        align-items: center
+        margin-left: auto
+        opacity: .3
+        transition: opacity .5s ease
+        width: 100%
+        &__line
+            border-bottom: 2px solid #ffffff
+            width: 100%
+        &__circle
+            min-width: 62px
+            min-height: 62px
+            border-radius: 100%
+            display: flex
+            align-items: center
+            justify-content: center
+            box-sizing: border-box
+            border: 2px solid #ffffff
+        &__arrow
+            min-height: 12px
+            min-width: 12px
+            margin-left: -6px
+            box-sizing: border-box
+            transform: rotate(45deg)
+            border: 2px solid #ffffff
+            border-left: none
+            border-bottom: none
+    &:hover *
+        opacity: 1
+
+.scroll-info
+    +col()
+    +size(12)
+    height: 48px
+    margin-top: 72px
+    display: flex
+    color: #b4b4b4
+    font-weight: 600
+    align-items: center
+    background: #fafbfd
+    justify-content: center
+
+
+// Section Our services
+.our-services
+    background: #fafbfd
+    padding: 111px 0 157px 0
+    +md(padding, 20px 0 20px 0)
+
+.cards-wrapper
+    +col()
+    +size(12)
+    display: flex
+    justify-content: center
+    flex-wrap: wrap
+    +to(790px)
+        flex-direction: column
+        align-items: center
+    .card
+        margin-right: 70px
+        +to(790px)
+            margin-right: 0
+            margin-bottom: 40px
+        &:last-child
+            margin-right: 0
+
+.card
+    $cardparent: &
+    padding: 38px
+    box-sizing: border-box
+    height: 330px
+    width: 330px
+    border-radius: 9px
+    display: flex
+    flex-direction: column
+    box-shadow: 0 0 30px rgba(0, 0, 0, .1)
+    transition: all .5s ease
+    +md-block()
+        width: 100%
+        border-radius: 0
+        border: none
+        box-shadow: 0 0 0 #ffffff
+        &:hover
+            transform:  none
+    +to(387px)
+        width: auto
+        justify-content: space-between
+        & *
+            margin: 0
+    &__title
+        margin-top: 28px
+        font-size: 25px
+        font-weight: 500
+    &__text
+        margin-top: 22px
+    &__link
+        color: $palette-primary
+        font-size: 13px
+        margin-top: auto
+    .icon
+        height: 52px
+        width: 52px
+    &_primary
+        background-color: #ffffff
+        & #{$cardparent}__title
+            color: $palette-secondary
+        & #{$cardparent}__text
+            color: $palette-paragraph
+        .icon
+            fill: $palette-primary
+    &_commercial
+        color: #ffffff
+        background-color: $palette-secondary
+        & #{$cardparent}__title
+            color: #ffffff
+        .icon
+            fill: #ffffff
+    &:hover
+        transform: scale(1.1)
+// Section Why hire us
+.whyus
+    padding: 137px 0 123px 0
+    +md(padding, 20px 0 20px 0)
+    .image-wrapper
+        +col()
+        +size(5)
+        +shift(1)
+        +sm-block()
+            +size(12)
+            margin-bottom: auto
+        margin-bottom: -90px
+        &__room
+            box-shadow: 0 0 30px rgba(0, 0, 0, .2)
+        &__dots
+            +sm(display, none)
+            position: relative
+            bottom: 124px
+            left: 311px
+            display: inline-block
+    .side-image-wrapper
+        +col()
+        +size(6)
+        +lg(display, none)
+        height: 15vh
+        display: flex
+        align-items: center
+        .hero
+            background: url('/img/hand.png') no-repeat right top/100% 100%
+            width: 40%
+            height: 70%
+            position: absolute
+            right: 0
+.new-way
+    +col()
+    +shift-left(1)
+    +md(margin, 0)
+    &_part-one, &_part-two
+        +size(5)
+        +md-block()
+            +size(12)
+            margin-top: 20px
+            margin-bottom: 0
+        margin-top: 58px
+        color: $palette-paragraph
+    &_part-two &__text
+        margin-bottom: 34px
+        +md(margin-bottom, 20)
+
+.adventages
+    +col()
+    +size(5)
+    +shift-left(1)
+    +md-block()
+        margin: 0 auto
+        +size(12)
+    +sm-block()
+        margin-top: 30px
+    &__title
+        margin-top: 25px
+    &__text
+        color: $palette-paragraph-secondary
+        margin-top: 44px
+    &-list
+        margin-top: 48px
+        &__item
+            color: $palette-secondary
+            font-size: 16px
+            font-weight: 500
+            margin-bottom: 24px
+            display: flex
+            align-items: center
+            &:last-child
+                margin-bottom: 0
+            .icon-check
+                fill: $palette-primary
+                height: 21px
+                width: 15px
+                margin-right: 36px
+// Section booking
+.booking
+    padding-top: 123px
+    +md(padding-top, 30px)
+    .booking-config
+        +col()
+        +size(5)
+        +shift(1)
+        +size-lg(12)
+        +xl-block()
+            margin: auto
+            +size(6)
+        +md-block()
+            margin: 0 auto
+        &__title
+            margin-top: 23px
+        &__text
+            +md(margin-top, 30px)
+            margin-top: 60px
+            color: $palette-paragraph-secondary
+
+        .form-configure
+            margin-top: 70px
+            +md(margin-top, 20px)
+            .buttons-wrapper
+                padding-top: 20px
+                margin-bottom: 53px
+                +md-block()
+                    .btn
+                        margin-right: 0
+                        width: 100%
+                        margin-bottom: 10px
+                .btn
+                    margin-right: 25px
+            &__title
+                color: $palette-primary
+            .rooms-counter
+                display: flex
+                flex-direction: column
+                margin-right: 60px
+                +sm(margin-right, 30px)
+                +to(384px)
+                    margin-right: 0
+                &__title
+                    color: $palette-primary
+                &-wrapper
+                    display: flex
+                    +to(384px)
+                            flex-direction: column
+                            align-items: center
+                    .buttons-wrapper
+                        display: flex
+                        &__count
+                            border: none
+                            font-weight: 500
+                            text-align: center
+                            width: 62px
+                        &__up, &__down
+                            padding: 18px
+                            cursor: pointer
+                        &__up
+                            background: url(/img/button_plus.svg) no-repeat center center
+                        &__down
+                            background: url(/img/button_minus.svg) no-repeat center center
+
+    .booking-results
+        +col()
+        +size(5)
+        +size-lg(12)
+        display: table
+        padding: 57px 80px
+        +to(1118px)
+            padding: 20px 30px
+        color: #ffffff
+        box-sizing: border-box
+        background-color: $palette-secondary
+        p
+            font-weight: 500
+            margin-bottom: 16px
+        &__subtotal
+            color: #ffffff
+            +to(388px)
+                font-size: 22px
+        .time-wrapper
+            display: flex
+            margin-top: 23px
+        &__time
+            color: $palette-primary
+            margin-left: 4px
+        .confirm-booking
+            display: flex
+            flex-direction: column
+            margin-top: 54px
+            &__input
+                border: none
+                border-bottom: 1px solid #ffffff
+                background-color: $palette-secondary
+                color: #ffffff
+                padding-bottom: 5px
+                line-height: 24px
+                margin-bottom: 15px
+                &::placeholder
+                    color: #ffffff
+                    opacity: 1
+            .btn_link
+                margin-top: 15px
+                align-self: flex-start
+                .icon
+                    margin-left: 25px
+
+// Section testimonials
+.testimonials
+    background-color: #f6f7fb
+    padding: 158px 0 100px 0
+    +md(padding, 50px 0 20px 0)
+    overflow: hidden
+    .heading
+        +col()
+        +size(12)
+        +shift(1)
+    .reviews
+        +col()
+        +size(12)
+        padding-top: 61px
+        display: flex
+        .review
+            background: #ffffff
+            padding: 60px 35px
+            display: flex
+            flex-direction: column
+            box-shadow: 0 0 30px rgba(0, 0, 0, .2)
+            box-sizing: border-box
+            min-width: 400px
+            min-height: 400px
+            max-width: 400px
+            max-height: 400px
+            +to(464px)
+                min-width: 250px
+                min-height: 250px
+                max-width: 250px
+                max-height: 250px
+                padding: 20px
+                & *
+                    margin: 0
+                &__text
+                    font-size: 14px
+                    margin-top: 10px
+                &__image
+                    height: 52px
+                    width: 52px
+            &__image
+                align-self: flex-start
+                height: 62px
+                width: 62px
+            &__text
+                margin-top: 31px
+                color: $palette-secondary
+                font-size: 18px
+                font-weight: 500
+            .author
+                margin-top: auto
+            &__name
+                color: $palette-primary
+            &__city
+                color: $palette-paragraph
+
+.contactus
+    background-color: #f6f7fb
+    padding: 57px 0 159px 0
+    +md(padding, 50px 0 50px 0)
+    .container
+        text-align: center
+        .title
+            font-size: 25px
+            font-weight: 500
+            margin-bottom: 41px
+        .buttons-wrapper
+            display: flex
+            width: 100%
+            justify-content: center
+            +sm(flex-direction, column)
+            .btn
+                margin-right: 30px
+                +sm-block()
+                    margin-right: 0
+                    margin-bottom: 20px
+                &:last-child
+                    margin-right: 0
+            
+.footer
+    padding: 80px 0
+    +md(padding, 50px 0 50px 0)
+    .title
+        margin-bottom: 25px
+    .text
+        margin-bottom: 25px
+    .container
+        text-align: center
+        .icon
+            width: 30px
+            height: 30px
+            margin-right: 24px
+            &:last-child
+                margin-right: 0
+
+.owl-stage, .owl-stage-outer
+    overflow: visible !important
+    width: 100% !important
+    display: flex
+    justify-content: space-between
+
+.owl-item .active
+    width: 100% !important
